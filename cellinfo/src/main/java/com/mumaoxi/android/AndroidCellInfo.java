@@ -25,6 +25,8 @@ public class AndroidCellInfo {
         public String mobileCountryCode;
         public String mobileNetworkCode;
         public int locationAreaCode;
+        public int systemId;
+        public int netWorkId;
         public String radioType;
 
         public CellIDInfo() {
@@ -65,18 +67,17 @@ public class AndroidCellInfo {
 
         try {
             String radioType;
-            int lac;
-            int cid;
 
             if (manager.getCellLocation() instanceof GsmCellLocation) {
                 GsmCellLocation location = (GsmCellLocation) manager.getCellLocation();
-                lac = location.getLac();
-                cid = location.getCid();
+                currentCell.locationAreaCode = location.getLac();
+                currentCell.cellId = location.getCid();
                 radioType = "gsm";
             } else if (manager.getCellLocation() instanceof CdmaCellLocation) {
                 CdmaCellLocation location = (CdmaCellLocation) manager.getCellLocation();
-                lac = location.getNetworkId();
-                cid = location.getBaseStationId();
+                currentCell.cellId = location.getBaseStationId();
+                currentCell.systemId = location.getSystemId();
+                currentCell.netWorkId = location.getNetworkId();
                 radioType = "cdma";
             } else {
                 return cellInfos;
@@ -89,11 +90,8 @@ public class AndroidCellInfo {
                     .getSimOperator().length() >= 5) ? manager
                     .getSimOperator().substring(3, 5) : "";
 
-            currentCell.cellId = cid;
-
             currentCell.mobileCountryCode = mcc;
             currentCell.mobileNetworkCode = mnc;
-            currentCell.locationAreaCode = lac;
 
             currentCell.radioType = radioType;
 
@@ -109,7 +107,7 @@ public class AndroidCellInfo {
                 info.cellId = list.get(i).getCid();
                 info.mobileCountryCode = mcc;
                 info.mobileNetworkCode = mnc;
-                info.locationAreaCode = lac;
+                info.locationAreaCode = currentCell.locationAreaCode;
 
                 cellInfos.add(info);
             }
