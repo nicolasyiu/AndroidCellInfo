@@ -1,4 +1,4 @@
-package com.mumaoxi.android;
+package com.NicolasYiu.android;
 
 import android.content.Context;
 import android.telephony.NeighboringCellInfo;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by saxer on 12/21/15.
+ * Created by NicolasYiu on 12/21/15.
  */
 public class AndroidCellInfo {
     private static final String TAG = AndroidCellInfo.class.getSimpleName();

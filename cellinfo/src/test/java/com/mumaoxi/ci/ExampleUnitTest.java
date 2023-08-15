@@ -1,4 +1,4 @@
-package com.mumaoxi.android;
+package com.NicolasYiu.android;
 
 import org.junit.Test;
 
